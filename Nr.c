@@ -11,13 +11,10 @@
 struct Nr * Nr_create(double const r, double const i)
 {
     struct Nr * const ret_val = malloc(sizeof *ret_val);
-    struct Nr const buf = (struct Nr)
-    {
-        .r = r,
-        .i = i
-    };
 
     assert(ret_val != NULL);
+
+    struct Nr const buf = { r, i };
 
     memcpy(ret_val, &buf, sizeof *ret_val);
 

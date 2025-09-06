@@ -8,6 +8,13 @@
 
 #include "Nr.h"
 
+static double squared_magnitude(struct Nr const * const nr)
+{
+    assert(nr != NULL);
+
+    return nr->r * nr->r + nr->i * nr->i;
+}
+
 struct Nr * Nr_create(double const r, double const i)
 {
     struct Nr * const ret_val = malloc(sizeof *ret_val);
@@ -50,7 +57,12 @@ struct Nr * Nr_div(struct Nr const * const a, struct Nr const * const b)
     assert(a != NULL);
     assert(b != NULL);
 
-    double const buf = b->r * b->r + b->i * b->i;
+    double const buf = squared_magnitude(b);
+
+    if(buf == 0.0)
+    {
+        return NULL; // Result is undefined.
+    }
 
     return Nr_create(
         (a->r * b->r + a->i * b->i) / buf,
@@ -61,7 +73,7 @@ double Nr_magnitude(struct Nr const * const nr)
 {
     assert(nr != NULL);
 
-    return sqrt(nr->r * nr->r + nr->i * nr->i);
+    return sqrt(squared_magnitude(nr));
 }
 
 double Nr_phi(struct Nr const * const nr)

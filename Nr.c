@@ -50,7 +50,7 @@ struct Nr * Nr_div(struct Nr const * const a, struct Nr const * const b)
     assert(a != NULL);
     assert(b != NULL);
 
-    double const buf = pow(b->r, 2.0) + pow(b->i, 2.0);
+    double const buf = b->r * b->r + b->i * b->i;
 
     return Nr_create(
         (a->r * b->r + a->i * b->i) / buf,
@@ -61,7 +61,7 @@ double Nr_magnitude(struct Nr const * const nr)
 {
     assert(nr != NULL);
 
-    return sqrt(pow(nr->r, 2.0) + pow(nr->i, 2.0));
+    return sqrt(nr->r * nr->r + nr->i * nr->i);
 }
 
 double Nr_phi(struct Nr const * const nr)

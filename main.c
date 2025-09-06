@@ -16,5 +16,12 @@ int main()
     printf("%f + j%f\n", b->r, b->i);
     printf("%f + j%f\n", c->r, c->i);
 
+    znr_delete(a);
+    a = NULL;
+    znr_delete(b);
+    b = NULL;
+    znr_delete(c);
+    c = NULL;
+
     return EXIT_SUCCESS;
 }

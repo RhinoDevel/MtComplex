@@ -39,7 +39,7 @@ struct Nr * Nr_create_from_polar(double const phi, double const magnitude);
  */
 struct Nr * Nr_create(double const r, double const i);
 
-void Nr_delete(struct Nr * nr);
+void Nr_delete(struct Nr * const nr);
 
 #ifdef __cplusplus
 }

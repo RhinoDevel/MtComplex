@@ -39,6 +39,8 @@ struct Nr * Nr_create_from_polar(double const phi, double const magnitude);
  */
 struct Nr * Nr_create(double const r, double const i);
 
+/** Frees memory of given object which also invalidates given pointer.
+ */
 void Nr_delete(struct Nr * const nr);
 
 #ifdef __cplusplus

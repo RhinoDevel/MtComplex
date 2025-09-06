@@ -17,7 +17,7 @@ struct Nr * Nr_create(double const r, double const i)
         .i = i
     };
 
-    assert(ret_val!=NULL);
+    assert(ret_val != NULL);
 
     memcpy(ret_val, &buf, sizeof *ret_val);
 
@@ -41,7 +41,7 @@ struct Nr * Nr_mul(struct Nr const * const a, struct Nr const * const b)
 
 struct Nr * Nr_div(struct Nr const * const a, struct Nr const * const b)
 {
-    double buf = pow(b->r, 2.0) + pow(b->i, 2.0);
+    double const buf = pow(b->r, 2.0) + pow(b->i, 2.0);
 
     return Nr_create(
         (a->r * b->r + a->i * b->i) / buf,
@@ -65,7 +65,7 @@ struct Nr * Nr_create_from_polar(double const phi, double const magnitude)
 
 void Nr_delete(struct Nr * const nr)
 {
-    assert(nr!=NULL);
+    assert(nr != NULL);
 
     free(nr);
 }

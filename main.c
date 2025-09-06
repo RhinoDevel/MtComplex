@@ -4,13 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Nr.h"
+#include "znr.h"
 
 int main()
 {
-    struct Nr * a = Nr_create(123.45, 33.3),
-        * b = Nr_create_from_polar(Nr_phi(a), Nr_magnitude(a)),
-        * c = Nr_sub(a, b);
+    struct znr * a = znr_create(123.45, 33.3),
+        * b = znr_create_from_polar(znr_phi(a), znr_magnitude(a)),
+        * c = znr_sub(a, b);
 
     printf("%f + j%f\n", a->r, a->i);
     printf("%f + j%f\n", b->r, b->i);

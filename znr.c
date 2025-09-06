@@ -6,7 +6,7 @@
 #include <math.h>
 #include <assert.h>
 
-#include "Nr.h"
+#include "znr.h"
 
 static double squared_magnitude(struct Nr const * const nr)
 {

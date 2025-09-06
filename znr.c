@@ -88,6 +88,13 @@ struct znr * znr_create_from_polar(double const phi, double const magnitude)
     return znr_create(magnitude * cos(phi), magnitude * sin(phi));
 }
 
+struct znr * znr_create_conjugate(struct znr const * const nr)
+{
+    assert(nr != NULL);
+
+    return znr_create(nr->r, -1.0 * nr->i);
+}
+
 void znr_delete(struct znr * const nr)
 {
     free(nr);

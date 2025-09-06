@@ -45,6 +45,12 @@ struct znr * znr_create_from_polar(double const phi, double const magnitude);
  */
 struct znr * znr_create(double const r, double const i);
 
+/**
+ * - Caller takes ownership of return value, which is to be freed via
+ *   znr_delete().
+ */
+struct znr * znr_create_conjugate(struct znr const * const nr);
+
 /** Frees memory of given object which also invalidates given pointer.
  * 
  *  - Works with NULL pointer given.

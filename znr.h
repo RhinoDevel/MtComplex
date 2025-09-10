@@ -58,6 +58,8 @@ double znr_magnitude(struct znr const * const nr);
  */
 double znr_phi(struct znr const * const nr);
 
+double znr_real_sin(double const r, int const n_terms);
+
 /**
  * - Caller takes ownership of return value, which is to be freed via
  *   znr_delete().

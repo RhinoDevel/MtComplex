@@ -58,6 +58,11 @@ double znr_magnitude(struct znr const * const nr);
  */
 double znr_phi(struct znr const * const nr);
 
+/**
+ *  - The term count is for the power series used for exponential calculation
+ *    [see znr_exp()].
+ *  - Warning: This function does no range reduction!
+ */
 double znr_real_sin(double const r, int const n_terms);
 
 /**

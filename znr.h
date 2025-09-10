@@ -58,7 +58,12 @@ double znr_magnitude(struct znr const * const nr);
  */
 double znr_phi(struct znr const * const nr);
 
-/**
+// TODO: Create function to get complex sine from complex value and make this
+//       function more or less a wrapper?
+//
+/** Calculates the real sine of given real value by using the exponential
+ *  function [see znr_exp()].
+ * 
  *  - The term count is for the power series used for exponential calculation
  *    [see znr_exp()].
  *  - Warning: This function does no range reduction!

@@ -88,11 +88,51 @@ struct znr * znr_create_from_polar(double const phi, double const magnitude)
     return znr_create(magnitude * cos(phi), magnitude * sin(phi));
 }
 
+struct znr * znr_create_copy(struct znr const * const nr)
+{
+    assert(nr != NULL);
+
+    return znr_create(nr->r, nr->i);
+}
+
 struct znr * znr_create_conjugate(struct znr const * const nr)
 {
     assert(nr != NULL);
 
     return znr_create(nr->r, -1.0 * nr->i);
+}
+
+struct znr * znr_exp(struct znr const * const nr, int const n_terms)
+{
+    struct znr * ret_val = znr_create(1.0, 0.0);
+    struct znr * term = znr_create_copy(ret_val);
+
+    for(int n = 1; n < n_terms; ++n)
+    {
+        // term = term * z / n
+
+        struct znr * z_div =
+            znr_create(nr->r / (double)n, nr->i / (double)n);
+
+        struct znr * new_term = znr_mul(term, z_div);
+        
+        znr_delete(z_div);
+        z_div = NULL;
+
+        znr_delete(term);
+        term = new_term;
+        new_term = NULL;
+        
+        struct znr * new_sum = znr_add(ret_val, term);
+
+        znr_delete(ret_val);
+        ret_val = new_sum;
+        new_sum = NULL;
+    }
+
+    znr_delete(term);
+    term = NULL;
+    return ret_val;
 }
 
 void znr_delete(struct znr * const nr)

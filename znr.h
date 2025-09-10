@@ -14,14 +14,30 @@ struct znr
     double const i; // The imaginary part of the complex number.
 };
 
+/**
+ * - Caller takes ownership of return value, which is to be freed via
+ *   znr_delete().
+ */
 struct znr * znr_add(struct znr const * const a, struct znr const * const b);
+
+/**
+ * - Caller takes ownership of return value, which is to be freed via
+ *   znr_delete().
+ */
 struct znr * znr_sub(struct znr const * const a, struct znr const * const b);
+
+/**
+ * - Caller takes ownership of return value, which is to be freed via
+ *   znr_delete().
+ */
 struct znr * znr_mul(struct znr const * const a, struct znr const * const b);
 
 /** Return a / b.
  * 
  *  - Returns NULL, if result is undefined, because squared magnitude of b is 0
  *    (which would cause a division by zero).
+ *  - Caller takes ownership of return value, which is to be freed via
+ *    znr_delete().
  */
 struct znr * znr_div(struct znr const * const a, struct znr const * const b);
 
@@ -49,7 +65,21 @@ struct znr * znr_create(double const r, double const i);
  * - Caller takes ownership of return value, which is to be freed via
  *   znr_delete().
  */
+struct znr * znr_create_copy(struct znr const * const nr);
+
+/**
+ * - Caller takes ownership of return value, which is to be freed via
+ *   znr_delete().
+ */
 struct znr * znr_create_conjugate(struct znr const * const nr);
+
+/** Create complex exponential of given nr., using power series with given count
+ *  of terms.
+ * 
+ *  - Caller takes ownership of return value, which is to be freed via
+ *    znr_delete().
+ */
+struct znr * znr_exp(struct znr const * const nr, int const n_terms);
 
 /** Frees memory of given object which also invalidates given pointer.
  * 

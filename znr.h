@@ -1,6 +1,11 @@
 
 // RhinoDevel, Marcel Timm, 2017dec10
 
+// This is a complex number calculation library more or less for educational
+// purposes, but it works and it has some tricks included like calculating the
+// complex exponential by power series and the sine via the sine identity that
+// includes the complex exponential function (and thus makes use of it).
+
 #ifndef MT_ZNR
 #define MT_ZNR
 
@@ -58,9 +63,6 @@ double znr_magnitude(struct znr const * const nr);
  */
 double znr_phi(struct znr const * const nr);
 
-// TODO: Create function to get complex sine from complex value and make this
-//       function more or less a wrapper?
-//
 /** Calculates the real sine of given real value by using the exponential
  *  function [see znr_exp()].
  * 

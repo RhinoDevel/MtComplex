@@ -69,6 +69,18 @@ struct znr * znr_div(struct znr const * const a, struct znr const * const b)
         (a->i * b->r - a->r * b->i) / buf);
 }
 
+struct znr * znr_div_r(struct znr const * const nr, double const r)
+{
+    assert(nr != NULL);
+
+    if(r == 0.0)
+    {
+        return NULL; // As results of divisions are undefined.
+    }
+
+    return znr_create(nr->r / r, nr->i / r);
+}
+
 double znr_magnitude(struct znr const * const nr)
 {
     assert(nr != NULL);

@@ -41,6 +41,15 @@ struct znr * znr_mul(struct znr const * const a, struct znr const * const b);
  */
 struct znr * znr_div(struct znr const * const a, struct znr const * const b);
 
+/** Divide real and imaginary part by given real number.
+ * 
+ *  - Returns NULL, if result is undefined, if given r is 0.0 (which would cause
+ *    a division by zero).
+ *  - Caller takes ownership of return value, which is to be freed via
+ *    znr_delete().
+ */
+struct znr * znr_div_r(struct znr const * const nr, double const r);
+
 /** Return the absolute value (modulus).
  */
 double znr_magnitude(struct znr const * const nr);

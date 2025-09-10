@@ -97,24 +97,57 @@ double znr_phi(struct znr const * const nr)
 
 double znr_real_sin(double const r, int const n_terms)
 {
+    struct znr * emix = NULL;
+    struct znr * num = NULL;
+    struct znr * denom = NULL;
+    struct znr * denom_conj = NULL;
+    struct znr * res = NULL;
+    struct znr * res_div = NULL;
     struct znr * z = znr_create(0.0, r); // Given nr. as imaginary part.
     struct znr * z_conj = znr_create_conjugate(z);
     struct znr * eix = znr_exp(z, n_terms);
-    struct znr * emix = znr_exp(z_conj, n_terms);
 
-    struct znr * num = znr_sub(eix, emix);
-    struct znr * denom = znr_create(0.0, 2.0); // 2i
+    znr_delete(z);
+    z = NULL;
+
+    emix = znr_exp(z_conj, n_terms);
+
+    znr_delete(z_conj);
+    z_conj = NULL;
+
+    num = znr_sub(eix, emix);
+
+    znr_delete(eix);
+    eix = NULL;
+
+    znr_delete(emix);
+    emix = NULL;
+
+    denom = znr_create(0.0, 2.0); // 2i
 
     // Divide nr. by denom. (manual since denom. is imaginary):
     
+    denom_conj = znr_create_conjugate(denom);
+    
     double const denom_mag_sqr = squared_magnitude(denom);
-    struct znr * denom_conj = znr_create_conjugate(denom);
-    struct znr * res = znr_mul(num, denom_conj);
-    struct znr * res_div = znr_div_r(res, denom_mag_sqr);
+
+    znr_delete(denom);
+    denom = NULL;
+
+    res = znr_mul(num, denom_conj);
+
+    znr_delete(denom_conj);
+    denom_conj = NULL;
+
+    res_div = znr_div_r(res, denom_mag_sqr);
+
+    znr_delete(res);
+    res = NULL;
 
     double const ret_val = res_div->r;  // sin(r) is the real part.
 
-    // TODO: Free all the objects on the heap!
+    znr_delete(res_div);
+    res_div = NULL;
 
     return ret_val;
 }

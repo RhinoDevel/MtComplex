@@ -45,7 +45,9 @@ static void test_exp()
 int main(void)
 {
     test_simple();
+    
     printf("\n");
+
     test_exp();
 
     return EXIT_SUCCESS;

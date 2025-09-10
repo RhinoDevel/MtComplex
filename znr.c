@@ -97,25 +97,27 @@ double znr_phi(struct znr const * const nr)
 
 double znr_real_sin(double const r, int const n_terms)
 {
+    struct znr * z = NULL;
+    struct znr * z_conj = NULL;
+    struct znr * eix = NULL;
     struct znr * emix = NULL;
-    struct znr * num = NULL;
-    struct znr * denom = NULL;
-    struct znr * denom_conj = NULL;
-    struct znr * res = NULL;
-    struct znr * res_div = NULL;
-    struct znr * z = znr_create(0.0, r); // Given nr. as imaginary part.
-    struct znr * z_conj = znr_create_conjugate(z);
-    struct znr * eix = znr_exp(z, n_terms);
+    struct znr * num = NULL; // Numerator
+    struct znr * denom = NULL; // Denominator
+    struct znr * result = NULL;
+
+    z = znr_create(0.0, r); // 0 + ix = ix
+    z_conj = znr_create_conjugate(z); // 0 - ix = -ix
+    eix = znr_exp(z, n_terms); // e^ix
 
     znr_delete(z);
     z = NULL;
 
-    emix = znr_exp(z_conj, n_terms);
+    emix = znr_exp(z_conj, n_terms); // e^-ix
 
     znr_delete(z_conj);
     z_conj = NULL;
 
-    num = znr_sub(eix, emix);
+    num = znr_sub(eix, emix); // e^ix - e^-ix
 
     znr_delete(eix);
     eix = NULL;
@@ -123,31 +125,20 @@ double znr_real_sin(double const r, int const n_terms)
     znr_delete(emix);
     emix = NULL;
 
-    denom = znr_create(0.0, 2.0); // 2i
+    denom = znr_create(0.0, 2.0); // 0 + 2i = 2i
 
-    // Divide nr. by denom. (manual since denom. is imaginary):
-    
-    denom_conj = znr_create_conjugate(denom);
-    
-    double const denom_mag_sqr = squared_magnitude(denom);
+    result = znr_div(num, denom); // (e^ix - e^-ix) / 2i 
+
+    znr_delete(num);
+    num = NULL;
 
     znr_delete(denom);
     denom = NULL;
 
-    res = znr_mul(num, denom_conj);
+    double const ret_val = result->r;  // sin(x) is the real part.
 
-    znr_delete(denom_conj);
-    denom_conj = NULL;
-
-    res_div = znr_div_r(res, denom_mag_sqr);
-
-    znr_delete(res);
-    res = NULL;
-
-    double const ret_val = res_div->r;  // sin(r) is the real part.
-
-    znr_delete(res_div);
-    res_div = NULL;
+    znr_delete(result);
+    result = NULL;
 
     return ret_val;
 }

@@ -6,12 +6,13 @@
 
 #include "znr.h"
 
-int main()
+static void test_simple(void)
 {
     struct znr * a = znr_create(123.45, 33.3),
         * b = znr_create_from_polar(znr_phi(a), znr_magnitude(a)),
         * c = znr_sub(a, b);
 
+    printf("Simple test results:\n");
     printf("%f + j%f\n", a->r, a->i);
     printf("%f + j%f\n", b->r, b->i);
     printf("%f + j%f\n", c->r, c->i);
@@ -22,6 +23,11 @@ int main()
     b = NULL;
     znr_delete(c);
     c = NULL;
+}
+
+int main(void)
+{
+    test_simple();
 
     return EXIT_SUCCESS;
 }

@@ -123,8 +123,7 @@ struct znr * znr_exp(struct znr const * const nr, int const n_terms)
     {
         // term = term * nr / n
 
-        struct znr * z_div =
-            znr_create(nr->r / (double)n, nr->i / (double)n);
+        struct znr * z_div = znr_div_r(nr, (double)n);
 
         struct znr * new_term = znr_mul(term, z_div);
         

@@ -25,9 +25,28 @@ static void test_simple(void)
     c = NULL;
 }
 
+static void test_exp()
+{
+    static int const n_terms = 20;
+
+    struct znr * a = znr_create(1.0, 0.0);
+    struct znr * b = znr_exp(a, n_terms);
+
+    printf("Exponential test results:\n");
+    printf("%f + j%f\n", a->r, a->i);
+    printf("%f + j%f\n", b->r, b->i);
+
+    znr_delete(a);
+    a = NULL;
+    znr_delete(b);
+    b = NULL;
+}
+
 int main(void)
 {
     test_simple();
+    printf("\n");
+    test_exp();
 
     return EXIT_SUCCESS;
 }

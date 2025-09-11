@@ -99,6 +99,7 @@ struct znr * znr_create_conjugate(struct znr const * const nr);
 /** Create complex exponential of given nr., using power series with given count
  *  of terms.
  * 
+ *  - Warning: This function does no range reduction!
  *  - Caller takes ownership of return value, which is to be freed via
  *    znr_delete().
  */

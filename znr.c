@@ -164,6 +164,10 @@ struct znr * znr_create_conjugate(struct znr const * const nr)
 
 struct znr * znr_exp(struct znr const * const nr, int const n_terms)
 {
+    // TODO: Add range reduction (for large values).
+
+    // TODO: Improve performance by optimizing calculation in loop.
+
     struct znr * ret_val = znr_create(1.0, 0.0);
     struct znr * term = znr_create_copy(ret_val);
 

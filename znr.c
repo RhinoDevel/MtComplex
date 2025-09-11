@@ -166,7 +166,9 @@ struct znr * znr_exp(struct znr const * const nr, int const n_terms)
 {
     // TODO: Add range reduction (for large values).
 
-    // TODO: Improve performance by optimizing calculation in loop.
+    // TODO: Improve performance by optimizing calculation in loop (e.g.
+    //       eventually use Horner's method to reduce calculations and avoid
+    //       overflow).
 
     struct znr * ret_val = znr_create(1.0, 0.0);
     struct znr * term = znr_create_copy(ret_val);

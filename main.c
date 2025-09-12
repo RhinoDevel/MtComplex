@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include "znr.h"
+#include "ln.h"
 
 static void test_simple(void)
 {
@@ -40,6 +41,12 @@ static void test_real_sin()
     printf("%f\n", real_sin);
 }
 
+static void test_real_ln()
+{
+    printf("Natural logarithm via exponential test results:\n");
+    printf("%f\n", ln_ln(5.0));
+}
+
 int main(void)
 {
     test_simple();
@@ -52,5 +59,9 @@ int main(void)
 
     test_real_sin();
     
+    printf("\n");
+
+    test_real_ln();
+
     return EXIT_SUCCESS;
 }

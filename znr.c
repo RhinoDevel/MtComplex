@@ -2,7 +2,6 @@
 // RhinoDevel, Marcel Timm, 2017dec10
 
 #include <stdlib.h>
-#include <string.h>
 #include <math.h>
 #include <assert.h>
 #include <stdbool.h>

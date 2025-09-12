@@ -8,38 +8,26 @@
 
 static void test_simple(void)
 {
-    struct znr * a = znr_create(123.45, 33.3),
-        * b = znr_create_from_polar(znr_phi(a), znr_magnitude(a)),
-        * c = znr_sub(a, b);
+    struct znr const a = (struct znr){ .r = 123.45, .i = 33.3 };
+    struct znr const b = znr_from_polar(znr_phi(a), znr_magnitude(a));
+    struct znr const c = znr_sub(a, b);
 
     printf("Simple test results:\n");
-    printf("%f + j%f\n", a->r, a->i);
-    printf("%f + j%f\n", b->r, b->i);
-    printf("%f + j%f\n", c->r, c->i);
-
-    znr_delete(a);
-    a = NULL;
-    znr_delete(b);
-    b = NULL;
-    znr_delete(c);
-    c = NULL;
+    printf("%f + j%f\n", a.r, a.i);
+    printf("%f + j%f\n", b.r, b.i);
+    printf("%f + j%f\n", c.r, c.i);
 }
 
 static void test_exp()
 {
     static int const n_terms = 20;
 
-    struct znr * a = znr_create(1.0, 0.0);
-    struct znr * b = znr_exp(a, n_terms);
+    struct znr const a = (struct znr){ .r = 1.0, .i = 0.0};
+    struct znr const b = znr_exp(a, n_terms);
 
     printf("Exponential test results:\n");
-    printf("%f + j%f\n", a->r, a->i);
-    printf("%f + j%f\n", b->r, b->i);
-
-    znr_delete(a);
-    a = NULL;
-    znr_delete(b);
-    b = NULL;
+    printf("%f + j%f\n", a.r, a.i);
+    printf("%f + j%f\n", b.r, b.i);
 }
 
 static void test_real_sin()
@@ -63,6 +51,6 @@ int main(void)
     printf("\n");
 
     test_real_sin();
-
+    
     return EXIT_SUCCESS;
 }

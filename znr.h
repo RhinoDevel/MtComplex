@@ -91,7 +91,7 @@ struct znr znr_exp(struct znr const nr, int const n_terms);
 
 /** Returns true, if the given complex nr. is invalid.
  */
-static bool znr_is_nan(struct znr const nr);
+bool znr_is_nan(struct znr const nr);
 
 #ifdef __cplusplus
 }

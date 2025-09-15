@@ -1,19 +1,14 @@
 
 // RhinoDevel, Marcel Timm, 2017dec10
 
+#include "znr.h"
+
 #include <stdlib.h>
 #include <math.h> // For NAN.
 #include <assert.h>
 #include <stdbool.h>
 
-#include "znr.h"
-
 static struct znr const s_nan = { .r = NAN, .i = NAN };
-
-static bool znr_is_nan(struct znr const nr)
-{
-    return nr.r == s_nan.r && nr.i == s_nan.i;
-}
 
 static double squared_magnitude(struct znr const nr)
 {
@@ -148,4 +143,9 @@ struct znr znr_exp(struct znr const nr, int const n_terms)
         ret_val = znr_add(ret_val, term);
     }
     return ret_val;
+}
+
+bool znr_is_nan(struct znr const nr)
+{
+    return nr.r == s_nan.r && nr.i == s_nan.i;
 }

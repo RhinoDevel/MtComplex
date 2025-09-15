@@ -27,9 +27,12 @@ static void test_exp()
     struct znr const a = (struct znr){ .r = 1.0, .i = 0.0};
     struct znr const b = znr_exp(a, n_terms);
 
+    double const e = const_e();
+
     printf("Exponential test results:\n");
     printf("%f + j%f\n", a.r, a.i);
     printf("%f + j%f\n", b.r, b.i);
+    printf("e = %1.51f\n", e);
 }
 
 static void test_real_trig()
@@ -45,10 +48,10 @@ static void test_real_trig()
     double const pi = const_pi();
 
     printf("Real trigonometric functions via exponential test results:\n");
-    printf("sin(%f): %f\n", r, real_sin);
-    printf("cos(%f): %f\n", r, real_cos);
-    printf("tan(%f): %f\n", r, real_tan);
-    printf("Pi = %f\n", pi);
+    printf("sin(%f): %1.51f\n", r, real_sin);
+    printf("cos(%f): %1.51f\n", r, real_cos);
+    printf("tan(%f): %1.51f\n", r, real_tan);
+    printf("Pi = %1.51f\n", pi);
 }
 
 static void test_real_ln()

@@ -3,8 +3,20 @@
 
 #include "ln.h"
 #include "znr.h"
+#include "newton_raphson.h"
 
 #include <math.h>
+
+static double newton_raphson_step_ln(double const x, double const val)
+{
+    // The terms to calculate by exponential function.
+    static int const exp_terms = 50; // TODO: More or less?
+
+    // x_n+1 = val / e^x_n + x_n - 1
+    return val / znr_exp((struct znr){ .r = x, .i = 0.0 }, exp_terms).r
+        + x
+        - 1.0;
+}
 
 double ln_ln(double const val)
 {
@@ -19,29 +31,8 @@ double ln_ln(double const val)
     // The initial guess:
     static double const x_0 = 1.0; // TODO: Improve generation?
 
-    // The terms to calculate by exponential function.
-    static int const exp_terms = 50; // TODO: More or less?
-
     // TODO: Add check, if given value is supported, return NAN otherwise!
 
-    // x_n+1 = val / e^x_n + x_n - 1
-
-    double x_last = 0.0;
-    double x = x_0;
-
-    for(int n = 1; n <= max_steps; ++n)
-    {
-        // TODO: Not using range reduction for exponential function!
-
-        x_last = x;
-        x = val / znr_exp((struct znr){ .r = x, .i = 0.0 }, exp_terms).r
-                + x_last
-                - 1.0;
-
-        if(fabs(x - x_last) < done_diff)
-        {
-            return x;
-        }
-    }
-    return NAN;
+    return newton_raphson(
+        max_steps, done_diff, x_0, val, newton_raphson_step_ln);
 }

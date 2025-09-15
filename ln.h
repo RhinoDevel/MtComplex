@@ -14,6 +14,7 @@ extern "C" {
 double ln_ln(double const val);
 
 /**
+ * - Returns NAN, if x is negative.
  * - Returns NAN, if no reasonably precise intermediate result for ln(x) or
  *   result exp(0.5 x ln(x)) was found by approximation.
  */

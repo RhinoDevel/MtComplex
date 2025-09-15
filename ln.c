@@ -43,6 +43,11 @@ double ln_sqrt(double const x)
 
     // sqrt(x) = exp(0.5 * ln(x))
 
+    if(x < 0.0)
+    {
+        return NAN;
+    }
+
     double const ln_x = ln_ln(x);
     
     if(isnan(ln_x))

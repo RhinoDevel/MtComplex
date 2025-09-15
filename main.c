@@ -1,8 +1,11 @@
 
 // RhinoDevel, Marcel Timm, 2017dec10
 
+#define _USE_MATH_DEFINES
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "znr.h"
 #include "ln.h"
@@ -32,7 +35,8 @@ static void test_exp()
     printf("Exponential test results:\n");
     printf("%f + j%f\n", a.r, a.i);
     printf("%f + j%f\n", b.r, b.i);
-    printf("e = %1.51f\n", e);
+    printf("e             = %.16f\n", e);
+    printf("C's constant e: %.16f\n", M_E);
 }
 
 static void test_real_trig()
@@ -48,10 +52,11 @@ static void test_real_trig()
     double const pi = const_pi();
 
     printf("Real trigonometric functions via exponential test results:\n");
-    printf("sin(%f): %1.51f\n", r, real_sin);
-    printf("cos(%f): %1.51f\n", r, real_cos);
-    printf("tan(%f): %1.51f\n", r, real_tan);
-    printf("Pi = %1.51f\n", pi);
+    printf("sin(%f): %.16f\n", r, real_sin);
+    printf("cos(%f): %.16f\n", r, real_cos);
+    printf("tan(%f): %.16f\n", r, real_tan);
+    printf("Pi             = %.16f\n", pi);
+    printf("C's constant Pi: %.16f\n", M_PI);
 }
 
 static void test_real_ln()
@@ -62,6 +67,11 @@ static void test_real_ln()
 
 int main(void)
 {
+    // Note: With "%.16f", the last digit includes some "garbage", because of
+    //       the limited precision of a 64 bit floating-point value.
+    //       <=> E.g. Pi and e can be precise up to the 15th digit behind the
+    //           decimal point, only.
+
     test_simple();
     
     printf("\n");

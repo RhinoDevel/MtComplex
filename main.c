@@ -6,6 +6,7 @@
 
 #include "znr.h"
 #include "ln.h"
+#include "const.h"
 
 static void test_simple(void)
 {
@@ -41,10 +42,13 @@ static void test_real_trig()
     double const real_cos = znr_real_cos(r, n_terms);
     double const real_tan = znr_real_tan(r, n_terms);
 
+    double const pi = const_pi();
+
     printf("Real trigonometric functions via exponential test results:\n");
     printf("sin(%f): %f\n", r, real_sin);
     printf("cos(%f): %f\n", r, real_cos);
     printf("tan(%f): %f\n", r, real_tan);
+    printf("Pi = %f\n", pi);
 }
 
 static void test_real_ln()

@@ -58,6 +58,16 @@ double znr_phi(struct znr const nr);
  */
 double znr_real_sin(double const r, int const n_terms);
 
+/** Calculates the real cosine of given real value by using the exponential
+ *  function [see znr_exp()].
+ * 
+ *  - The term count is for the power series used for exponential calculation
+ *    [see znr_exp()].
+ *  - Warning: This function does no range reduction!
+ *  - No need to know the constant Pi for this one. :-)
+ */
+double znr_real_cos(double const r, int const n_terms);
+
 struct znr znr_from_polar(double const phi, double const magnitude);
 
 struct znr znr_conjugate(struct znr const nr);

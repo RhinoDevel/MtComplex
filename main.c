@@ -36,9 +36,11 @@ static void test_real_sin()
     static int const n_terms = 20;
 
     double const real_sin = znr_real_sin(3.0 * 3.14159265 / 2.0, n_terms);
+    double const real_cos = znr_real_cos(3.0 * 3.14159265 / 2.0, n_terms);
 
     printf("Real sine via exponential test results:\n");
-    printf("%f\n", real_sin);
+    printf("Sine: %f\n", real_sin);
+    printf("Cosine: %f\n", real_cos);
 }
 
 static void test_real_ln()

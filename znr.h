@@ -62,8 +62,6 @@ struct znr znr_from_polar(double const phi, double const magnitude);
 
 struct znr znr_conjugate(struct znr const nr);
 
-struct znr znr_copy(struct znr const nr);
-
 /** Create complex exponential of given nr., using power series with given count
  *  of terms.
  * 

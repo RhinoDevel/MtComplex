@@ -96,11 +96,6 @@ struct znr znr_conjugate(struct znr const nr)
     return (struct znr){ .r = nr.r, .i = -1.0 * nr.i };
 }
 
-struct znr znr_copy(struct znr const nr)
-{
-    return (struct znr){ .r = nr.r, .i = nr.i };
-}
-
 struct znr znr_exp(struct znr const nr, int const n_terms)
 {
     // TODO: Add range reduction (for large values).
@@ -116,7 +111,7 @@ struct znr znr_exp(struct znr const nr, int const n_terms)
     //       reached (see Newton-Raphson used in ln.c)?
 
     struct znr ret_val = (struct znr){ .r = 1.0, .i = 0.0 };
-    struct znr term = znr_copy(ret_val);
+    struct znr term = ret_val;
 
     for(int n = 1; n < n_terms; ++n) // (starts with the second term)
     {

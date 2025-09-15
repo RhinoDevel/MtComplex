@@ -2,7 +2,7 @@
 // RhinoDevel, Marcel Timm, 2017dec10
 
 #include <stdlib.h>
-#include <math.h>
+#include <math.h> // For NAN.
 #include <assert.h>
 #include <stdbool.h>
 
@@ -97,6 +97,20 @@ double znr_real_cos(double const r, int const n_terms)
     struct znr const result = znr_div(num, denom); // (e^ix + e^-ix) / 2 
 
     return result.r;
+}
+
+double znr_real_tan(double const r, int const n_terms)
+{
+    double const cos_r = znr_real_cos(r, n_terms);
+
+    if(cos_r == 0.0)
+    {
+        return NAN;
+    }
+    
+    double const sin_r = znr_real_sin(r, n_terms);
+
+    return sin_r / cos_r;
 }
 
 struct znr znr_from_polar(double const phi, double const magnitude)

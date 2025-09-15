@@ -31,16 +31,20 @@ static void test_exp()
     printf("%f + j%f\n", b.r, b.i);
 }
 
-static void test_real_sin()
+static void test_real_trig()
 {
-    static int const n_terms = 20;
+    static int const n_terms = 50;
 
-    double const real_sin = znr_real_sin(3.0 * 3.14159265 / 2.0, n_terms);
-    double const real_cos = znr_real_cos(3.0 * 3.14159265 / 2.0, n_terms);
+    double const r = 1.0;
 
-    printf("Real sine via exponential test results:\n");
-    printf("Sine: %f\n", real_sin);
-    printf("Cosine: %f\n", real_cos);
+    double const real_sin = znr_real_sin(r, n_terms);
+    double const real_cos = znr_real_cos(r, n_terms);
+    double const real_tan = znr_real_tan(r, n_terms);
+
+    printf("Real trigonometric functions via exponential test results:\n");
+    printf("sin(%f): %f\n", r, real_sin);
+    printf("cos(%f): %f\n", r, real_cos);
+    printf("tan(%f): %f\n", r, real_tan);
 }
 
 static void test_real_ln()
@@ -59,7 +63,7 @@ int main(void)
 
     printf("\n");
 
-    test_real_sin();
+    test_real_trig();
     
     printf("\n");
 

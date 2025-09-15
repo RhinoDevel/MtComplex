@@ -108,6 +108,12 @@ struct znr znr_exp(struct znr const nr, int const n_terms)
     // TODO: Improve performance by optimizing calculation in loop (e.g.
     //       eventually use Horner's method to reduce calculations and avoid
     //       overflow).
+    //
+    //       Additionally break, if current sum of terms and latest sum of terms
+    //       before current iteration are no longer different enough (a "delta"
+    //       needs to be defined for this to know when to break the loop).
+    //       Maybe also return "not a number", if wanted precision could not be
+    //       reached (see Newton-Raphson used in ln.c)?
 
     struct znr ret_val = (struct znr){ .r = 1.0, .i = 0.0 };
     struct znr term = znr_copy(ret_val);

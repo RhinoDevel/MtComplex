@@ -62,7 +62,8 @@ static void test_real_trig()
 static void test_real_ln()
 {
     printf("Natural logarithm via exponential test results:\n");
-    printf("%f\n", ln_ln(5.0));
+    printf("ln(5) = %.16f\n", ln_ln(5.0));
+    printf("sqrt(17.53) = %.16f\n", ln_sqrt(17.53));
 }
 
 int main(void)

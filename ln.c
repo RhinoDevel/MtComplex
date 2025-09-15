@@ -5,8 +5,6 @@
 #include "znr.h"
 #include "newton_raphson.h"
 
-#include <math.h>
-
 static double newton_raphson_step_ln(double const x, double const val)
 {
     // The terms to calculate by exponential function.

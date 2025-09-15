@@ -8,6 +8,8 @@
 extern "C" {
 #endif
 
+double const_e(void);
+
 double const_pi(void);
 
 #ifdef __cplusplus

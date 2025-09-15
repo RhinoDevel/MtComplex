@@ -19,6 +19,13 @@ static double newton_raphson_step_pi_div_two(double const x, double const val)
     return ret_val;
 }
 
+double const_e(void)
+{
+    static int const exp_terms = 50; // TODO: More or less?
+
+    return znr_exp((struct znr){.r = 1.0, .i = 0.0}, exp_terms).r;
+}
+
 double const_pi(void)
 {
     // Approximate Pi by using Newton-Raphson.

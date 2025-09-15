@@ -13,6 +13,12 @@ double newton_raphson(
     double const val,
     double (*step_func)(double, double))
 {
+    assert(0 < max_steps);
+    assert(0.0 < done_diff);
+    // initial_guess
+    // val
+    assert(step_func != NULL);
+
     double x_last = 0.0;
     double x = initial_guess;
 

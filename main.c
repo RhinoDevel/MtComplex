@@ -3,14 +3,14 @@
 
 #define _USE_MATH_DEFINES
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
 #include "znr.h"
 #include "znr_pol.h"
 #include "ln.h"
 #include "const.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 static void test_simple(void)
 {

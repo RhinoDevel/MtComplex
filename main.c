@@ -8,13 +8,14 @@
 #include <math.h>
 
 #include "znr.h"
+#include "znr_pol.h"
 #include "ln.h"
 #include "const.h"
 
 static void test_simple(void)
 {
     struct znr const a = (struct znr){ .r = 123.45, .i = 33.3 };
-    struct znr const b = znr_from_polar(znr_phi(a), znr_magnitude(a));
+    struct znr const b = znr_pol_from(znr_pol_phi(a), znr_pol_magnitude(a));
     struct znr const c = znr_sub(a, b);
 
     printf("Simple test results:\n");

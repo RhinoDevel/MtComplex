@@ -21,6 +21,8 @@ struct znr
     double i; // The imaginary part of the complex number.
 };
 
+double znr_squared_magnitude(struct znr const nr);
+
 struct znr znr_add(struct znr const a, struct znr const b);
 struct znr znr_sub(struct znr const a, struct znr const b);
 struct znr znr_mul(struct znr const a, struct znr const b);
@@ -40,14 +42,6 @@ struct znr znr_div(struct znr const a, struct znr const b);
  *    value could be calculated.
  */
 struct znr znr_div_r(struct znr const nr, double const r);
-
-/** Return the absolute value (modulus).
- */
-double znr_magnitude(struct znr const nr);
-
-/** Return the argument ("phase"), which is the angle phi.
- */
-double znr_phi(struct znr const nr);
 
 /** Calculates the real sine of given real value by using the exponential
  *  function [see znr_exp()].
@@ -77,8 +71,6 @@ double znr_real_cos(double const r, int const n_terms);
  *  - Warning: This function does no range reduction!
  */
 double znr_real_tan(double const r, int const n_terms);
-
-struct znr znr_from_polar(double const phi, double const magnitude);
 
 struct znr znr_conjugate(struct znr const nr);
 

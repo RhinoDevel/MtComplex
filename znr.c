@@ -10,7 +10,7 @@
 
 static struct znr const s_nan = { .r = NAN, .i = NAN };
 
-static double squared_magnitude(struct znr const nr)
+double znr_squared_magnitude(struct znr const nr)
 {
     return nr.r * nr.r + nr.i * nr.i;
 }
@@ -36,7 +36,7 @@ struct znr znr_mul(struct znr const a, struct znr const b)
 
 struct znr znr_div(struct znr const a, struct znr const b)
 {
-    double const buf = squared_magnitude(b);
+    double const buf = znr_squared_magnitude(b);
 
     if(buf == 0.0)
     {
@@ -56,16 +56,6 @@ struct znr znr_div_r(struct znr const nr, double const r)
         return s_nan; // As results of divisions are undefined.
     }
     return (struct znr){ .r = nr.r / r, .i = nr.i / r };
-}
-
-double znr_magnitude(struct znr const nr)
-{
-    return sqrt(squared_magnitude(nr));
-}
-
-double znr_phi(struct znr const nr)
-{
-    return atan2(nr.i, nr.r);
 }
 
 double znr_real_sin(double const r, int const n_terms)
@@ -106,11 +96,6 @@ double znr_real_tan(double const r, int const n_terms)
     double const sin_r = znr_real_sin(r, n_terms);
 
     return sin_r / cos_r;
-}
-
-struct znr znr_from_polar(double const phi, double const magnitude)
-{
-    return (struct znr){ .r = magnitude * cos(phi), .i = magnitude * sin(phi) };
 }
 
 struct znr znr_conjugate(struct znr const nr)

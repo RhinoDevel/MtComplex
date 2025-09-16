@@ -4,8 +4,7 @@
 #include "ln.h"
 #include "znr.h"
 #include "newton_raphson.h"
-
-#include <math.h> // For isnan().
+#include "nan.h"
 
 static double newton_raphson_step_ln(double const x, double const val)
 {
@@ -31,7 +30,7 @@ double ln_ln(double const val)
     // The initial guess:
     static double const x_0 = 1.0; // TODO: Improve generation?
 
-    // TODO: Add check, if given value is supported, return NAN otherwise!
+    // TODO: Add check, if given value is supported, return not-a-number otherwise!
 
     return newton_raphson(
         max_steps, done_diff, x_0, val, newton_raphson_step_ln);
@@ -45,14 +44,14 @@ double ln_sqrt(double const x)
 
     if(x < 0.0)
     {
-        return NAN;
+        return nan_get();
     }
 
     double const ln_x = ln_ln(x);
     
-    if(isnan(ln_x))
+    if(nan_is(ln_x))
     {
-        return NAN;
+        return nan_get();
     }
 
     struct znr exp = znr_exp(
@@ -60,7 +59,7 @@ double ln_sqrt(double const x)
 
     if(znr_is_nan(exp))
     {
-        return NAN;
+        return nan_get();
     }
 
     return exp.r;

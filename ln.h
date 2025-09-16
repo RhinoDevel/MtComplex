@@ -9,14 +9,14 @@ extern "C" {
 #endif
 
 /**
- * - Returns NAN, if no reasonably precise result was found by approximation.
+ * - Returns not-a-number, if no reasonably precise result was found by approximation.
  */
 double ln_ln(double const val);
 
 /**
- * - Returns NAN, if x is negative.
- * - Returns NAN, if no reasonably precise intermediate result for ln(x) or
- *   result exp(0.5 x ln(x)) was found by approximation.
+ * - Returns not-a-number, if x is negative.
+ * - Returns not-a-number, if no reasonably precise intermediate result for
+ *   ln(x) or result exp(0.5 x ln(x)) was found by approximation.
  */
 double ln_sqrt(double const x);
 

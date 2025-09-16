@@ -26,7 +26,7 @@ double ln_ln(double const val)
     static int const max_steps = 30; // TODO: More or less?
 
     // Break, if last and current results difference is less than this value:
-    static double const done_diff = 1.0 / 100000.0; // TODO: More or less?
+    static double const done_diff = 1e-15; // TODO: More?
 
     // The initial guess:
     static double const x_0 = 1.0; // TODO: Improve generation?

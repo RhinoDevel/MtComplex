@@ -4,8 +4,6 @@
 #include "znr.h"
 #include "nan.h"
 
-#include <stdlib.h>
-#include <assert.h>
 #include <stdbool.h>
 
 static struct znr create_nan(void)

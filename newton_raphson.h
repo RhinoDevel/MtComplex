@@ -9,7 +9,8 @@ extern "C" {
 #endif
 
 /**
- * - Returns NAN, if no reasonably precise result was found by approximation.
+ * - Returns not-a-number, if no reasonably precise result was found by
+ *   approximation.
  */
 double newton_raphson(
     int const max_steps,

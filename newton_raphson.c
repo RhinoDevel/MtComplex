@@ -2,8 +2,8 @@
 // RhinoDevel, Marcel Timm, 2025sep15
 
 #include "newton_raphson.h"
+#include "nan.h"
 
-#include <math.h> // For NAN.
 #include <assert.h>
 
 double newton_raphson(
@@ -32,5 +32,5 @@ double newton_raphson(
             return x;
         }
     }
-    return NAN;
+    return nan_get();
 }

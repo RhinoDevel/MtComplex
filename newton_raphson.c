@@ -6,6 +6,19 @@
 
 #include <assert.h>
 
+// #ifndef NDEBUG
+//     #include <stdlib.h>
+// #endif //NDEBUG
+
+static double abs_diff(double const a, double const b)
+{
+    if(b < a)
+    {
+        return a - b;
+    }
+    return b - a;
+}
+
 double newton_raphson(
     int const max_steps,
     double const done_diff,
@@ -27,8 +40,15 @@ double newton_raphson(
         x_last = x;
         x = step_func(x, val);
 
-        if(fabs(x - x_last) < done_diff)
+// #ifndef NDEBUG
+//         printf("n = %d, x_last = %.16f, x = %.16f\n", n, x_last, x);
+// #endif //NDEBUG
+
+        if(abs_diff(x, x_last) < done_diff)
         {
+// #ifndef NDEBUG
+//             printf("Found x = %.16f\n", x);
+// #endif //NDEBUG
             return x;
         }
     }

@@ -65,7 +65,7 @@ double znr_real_cos(double const r, int const n_terms);
 /** Calculates the real tangent of given real value by using the exponential
  *  functions to calculate sine and cosine [see znr_exp()].
  * 
- *  - Returns NAN, if cosine of given value is 0.
+ *  - Returns not-a-number, if cosine of given value is 0.
  *  - The term count is for the power series used for exponential calculation
  *    of sine and cosine [see znr_exp()].
  *  - Warning: This function does no range reduction!

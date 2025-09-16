@@ -2,13 +2,18 @@
 // RhinoDevel, Marcel Timm, 2017dec10
 
 #include "znr.h"
+#include "nan.h"
 
 #include <stdlib.h>
-#include <math.h> // For NAN.
 #include <assert.h>
 #include <stdbool.h>
 
-static struct znr const s_nan = { .r = NAN, .i = NAN };
+static struct znr create_nan(void)
+{
+    double const nan = nan_get();
+
+    return (struct znr){.r = nan, .i = nan};
+}
 
 double znr_squared_magnitude(struct znr const nr)
 {
@@ -40,7 +45,7 @@ struct znr znr_div(struct znr const a, struct znr const b)
 
     if(buf == 0.0)
     {
-        return s_nan; // Result is undefined.
+        return create_nan(); // Result is undefined.
     }
     return (struct znr)
     {
@@ -53,7 +58,7 @@ struct znr znr_div_r(struct znr const nr, double const r)
 {
     if(r == 0.0)
     {
-        return s_nan; // As results of divisions are undefined.
+        return create_nan(); // As results of divisions are undefined.
     }
     return (struct znr){ .r = nr.r / r, .i = nr.i / r };
 }
@@ -90,7 +95,7 @@ double znr_real_tan(double const r, int const n_terms)
 
     if(cos_r == 0.0)
     {
-        return NAN;
+        return nan_get();
     }
     
     double const sin_r = znr_real_sin(r, n_terms);
@@ -132,5 +137,5 @@ struct znr znr_exp(struct znr const nr, int const n_terms)
 
 bool znr_is_nan(struct znr const nr)
 {
-    return nr.r == s_nan.r && nr.i == s_nan.i;
+    return nan_is(nr.r) || nan_is(nr.i);
 }

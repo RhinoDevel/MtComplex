@@ -4,6 +4,8 @@
 #include "znr_pol.h"
 #include "znr.h"
 
+#include <math.h> // TODO: Replace with own code!
+
 double znr_pol_magnitude(struct znr const nr)
 {
     return sqrt(znr_squared_magnitude(nr));

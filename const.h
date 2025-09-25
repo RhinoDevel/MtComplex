@@ -12,6 +12,8 @@ double const_e(void);
 
 double const_pi(void);
 
+double const_ln_2(void);
+
 #ifdef __cplusplus
 }
 #endif

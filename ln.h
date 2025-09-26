@@ -9,7 +9,10 @@ extern "C" {
 #endif
 
 /**
- * - Returns not-a-number, if no reasonably precise result was found by approximation.
+ * - Tries to apply range-reduction of input value to [0.5, 2.1), if not already
+ *   inside that range and returns with not-a-number, if that fails.
+ * - Returns not-a-number, if no reasonably precise result was found by
+ *   approximation.
  */
 double ln_ln(double const val);
 

@@ -5,10 +5,13 @@
 #include "znr.h"
 #include "newton_raphson.h"
 #include "nan.h"
+#include "norm.h"
 
 // #ifndef NDEBUG
 //     #include <stdlib.h>
 // #endif //NDEBUG
+
+static double s_ln_2 = 0.0; // Filled and used by ln_ln().
 
 static double newton_raphson_step_ln(double const x, double const val)
 {
@@ -28,6 +31,42 @@ static double newton_raphson_step_ln(double const x, double const val)
 
 double ln_ln(double const val)
 {
+    // ln(x) = ?
+    //
+    // 0 < x
+    //
+    // x = f * 2^n
+    //
+    // 0.5 <= f < 2.1 // TODO: Use larger range?
+    //
+    // ln(f * 2^n) = ln(f) - n * ln(2)
+    //
+    // => Proceed this way:
+    // 0) Pre-calculate ln(2) once.
+    // 1) Scale value to range. => f, n, 2^n
+    // 2) Calculate ln(f) with own method.
+    // 3) Calculate n * ln(2).
+    // 4) Calculate ln(x) by subtracting result of step 3 from step 2 result.
+
+    if(val <= 0.0)
+    {
+        return nan_get();
+    }
+
+    int norm_exp = 0;
+    double norm_val = 0.0;
+    double const norm_factor = norm_get_in_range_factor_and_fill(
+        val,
+        0.5,
+        2.1,
+        &norm_exp,
+        &norm_val);
+
+    if(norm_factor < 0.0)
+    {
+        return nan_get();
+    }
+
     // Approximate ln(val) by using exponential function and Newton-Raphson.
 
     // Break after this maximum iteration count:
@@ -39,10 +78,25 @@ double ln_ln(double const val)
     // The initial guess:
     static double const x_0 = 1.0; // TODO: Improve generation?
 
-    // TODO: Add check, if given value is supported, return not-a-number otherwise!
+    double const norm_ln = newton_raphson(
+        max_steps, done_diff, x_0, norm_val, newton_raphson_step_ln);
 
-    return newton_raphson(
-        max_steps, done_diff, x_0, val, newton_raphson_step_ln);
+    if(nan_is(norm_ln))
+    {
+        return norm_ln/*nan_get()*/;
+    }
+
+    if(norm_factor == 1.0)
+    {
+        return norm_ln;
+    }
+
+    if(s_ln_2 == 0.0)
+    {
+        s_ln_2 = ln_ln(2.0); // *** RECURSION ***
+    }
+    //printf("ln(%f) = %f + %d * %f\n", val, norm_ln, norm_exp, s_ln_2);
+    return norm_ln - (double)norm_exp * s_ln_2;
 }
 
 double ln_sqrt(double const x)

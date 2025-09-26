@@ -39,10 +39,19 @@ double newton_raphson(
     {
         x_last = x;
         x = step_func(x, val);
-
+       
 // #ifndef NDEBUG
 //         printf("n = %d, x_last = %.16f, x = %.16f\n", n, x_last, x);
 // #endif //NDEBUG
+
+        if(nan_is(x))
+        {
+// #ifndef NDEBUG
+//             printf(
+//                 "Exiting early, because step function returned not-a-number..");
+// #endif //NDEBUG 
+            return x/*nan_get()*/;
+        }
 
         if(abs_diff(x, x_last) < done_diff)
         {

@@ -13,6 +13,9 @@ extern "C" {
 #endif
 
 /** Return the absolute value (modulus).
+ * 
+ * - Returns not-a-number, if internal approximation used failed to produce a
+ *   reasonably precise intermediate result.
  */
 double znr_pol_magnitude(struct znr const nr);
 

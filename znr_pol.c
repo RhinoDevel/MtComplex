@@ -3,12 +3,13 @@
 
 #include "znr_pol.h"
 #include "znr.h"
+#include "ln.h"
 
 #include <math.h> // TODO: Replace with own code!
 
 double znr_pol_magnitude(struct znr const nr)
 {
-    return sqrt(znr_squared_magnitude(nr));
+    return ln_sqrt(znr_squared_magnitude(nr));
 }
 
 double znr_pol_phi(struct znr const nr)

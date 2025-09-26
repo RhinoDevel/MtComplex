@@ -5,6 +5,7 @@
 #include "nan.h"
 
 #include <stdbool.h>
+#include <assert.h>
 
 static struct znr create_nan(void)
 {
@@ -108,7 +109,38 @@ struct znr znr_conjugate(struct znr const nr)
 
 struct znr znr_exp(struct znr const nr, int const n_terms)
 {
-    // TODO: Add range reduction (for large values).
+    struct znr ret_val = (struct znr){ .r = 1.0, .i = 0.0 };
+    struct znr term = ret_val;
+    struct znr nr_to_use = nr;
+
+    // // Range reduction (for large values):
+    // //
+    // // e^nr = (e^(nr/k))^k
+    //
+    // // Threshold for magnitude of number used in power series calculation:
+    // static double const max_power_series_magnitude = 1.0;
+    //
+    // double const squared_magnitude = znr_squared_magnitude(nr);
+    // int k = 1;
+    //
+    // if(max_power_series_magnitude * max_power_series_magnitude
+    //     < squared_magnitude) // Avoids sqrt() usage.
+    // {
+    //     // => Range reduction IS necessary.
+    // 
+    //     // Approximate magnitude [also avoids sqrt() usage]:
+    //     double const approx_magnitude = // |nr| ~= |nr.r| + |nr.i|
+    //         (nr.r < 0.0 ? -nr.r : nr.r) + (nr.i < 0.0 ? -nr.i : nr.i);
+    //
+    //     k = (int)(approx_magnitude / max_power_series_magnitude) + 1;
+    //     if(1 < k)
+    //     {
+    //         // Scale given nr. down:
+    //         nr_to_use = znr_div_r(nr_to_use, (double)k);
+    //     }
+    // }
+    // //
+    // // Otherwise: Range reduction is NOT necessary. 
 
     // TODO: Improve performance by optimizing calculation in loop (e.g.
     //       eventually use Horner's method to reduce calculations and avoid
@@ -120,16 +152,23 @@ struct znr znr_exp(struct znr const nr, int const n_terms)
     //       Maybe also return "not a number", if wanted precision could not be
     //       reached (see Newton-Raphson used in ln.c)?
 
-    struct znr ret_val = (struct znr){ .r = 1.0, .i = 0.0 };
-    struct znr term = ret_val;
-
     for(int n = 1; n < n_terms; ++n) // (starts with the second term)
     {
-        // term = term * nr / n
+        // term = term * nr_to_use / n
 
-        term = znr_div_r(znr_mul(term, nr), n);
+        term = znr_div_r(znr_mul(term, nr_to_use), n);
+        
         ret_val = znr_add(ret_val, term);
     }
+
+    // // If range reduction was applied, scale the result back up:
+    // if(1 < k)
+    // {
+    //     assert(ret_val.i == 0.0); // TODO: Fix!
+    //
+    //     ret_val.r = pow(ret_val.r, k); // TODO: Use non-library function!
+    // }
+
     return ret_val;
 }
 

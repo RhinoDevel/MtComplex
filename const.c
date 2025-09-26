@@ -4,7 +4,6 @@
 #include "const.h"
 #include "znr.h"
 #include "newton_raphson.h"
-#include "ln.h"
 
 static double newton_raphson_step_pi_div_two(double const x, double const val)
 {
@@ -44,9 +43,4 @@ double const_pi(void)
         max_steps, done_diff, x_0, 0.0, newton_raphson_step_pi_div_two);
 
     return 2.0 * pi_div_two;
-}
-
-double const_ln_2(void)
-{
-    return ln_ln(2.0);
 }

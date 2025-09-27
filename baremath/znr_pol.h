@@ -29,4 +29,4 @@ struct znr znr_pol_from(double const phi, double const magnitude);
 }
 #endif
 
-#endif // MT_ZNR_POL
+#endif //MT_ZNR_POL

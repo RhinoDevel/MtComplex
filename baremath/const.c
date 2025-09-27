@@ -7,6 +7,8 @@
 
 static double newton_raphson_step_pi_div_two(double const x, double const val)
 {
+    (void)val; // For the compiler.
+
     // The terms to calculate by exponential function.
     static int const exp_terms = 21;
 

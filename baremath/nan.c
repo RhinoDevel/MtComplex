@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <assert.h>
+#include <string.h> // For memcpy().
 
 bool nan_is(double const val)
 {

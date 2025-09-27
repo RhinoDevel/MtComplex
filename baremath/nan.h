@@ -18,4 +18,4 @@ double nan_get(void);
 }
 #endif
 
-#endif // MT_NAN
+#endif //MT_NAN

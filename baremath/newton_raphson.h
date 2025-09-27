@@ -23,4 +23,4 @@ double newton_raphson(
 }
 #endif
 
-#endif // MT_NEWTON_RAPHSON
+#endif //MT_NEWTON_RAPHSON

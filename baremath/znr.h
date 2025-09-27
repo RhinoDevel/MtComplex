@@ -89,4 +89,4 @@ bool znr_is_nan(struct znr const nr);
 }
 #endif
 
-#endif // MT_ZNR
+#endif //MT_ZNR

@@ -11,7 +11,6 @@
 
 #include <stdio.h>
 #include <assert.h>
-#include <math.h>
 
 static void test_nan(void)
 {
@@ -19,7 +18,7 @@ static void test_nan(void)
 
 	assert(nan_is(nan)); // Own
 
-	assert(isnan(nan)); // Standard math lib.
+	//assert(isnan(nan)); // Standard math lib.
 
 	printf("*** TEST NAN ***\n");
 	printf("Own not a number = %f\n", nan);

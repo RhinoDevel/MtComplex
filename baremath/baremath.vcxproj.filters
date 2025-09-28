@@ -39,6 +39,9 @@
     <ClCompile Include="znr_pol.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="atan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="nan.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="znr_pol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="atan.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

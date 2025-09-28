@@ -12,8 +12,9 @@ static double newton_raphson_step_pi_div_two(double const x, double const val)
     // The terms to calculate by exponential function.
     static int const exp_terms = 21;
 
-    double const cos_x = znr_real_cos(x, exp_terms);
-    double const sin_x = znr_real_sin(x, exp_terms);
+    struct znr const complex_x = (struct znr){ .r = x, .i = 0.0 };
+    double const cos_x = znr_cos(complex_x, exp_terms).r;
+    double const sin_x = znr_sin(complex_x, exp_terms).r;
 
     // x_n+1 = x_n + cos_x / sin_x
     double const ret_val = x + cos_x / sin_x;

@@ -43,16 +43,16 @@ struct znr znr_div(struct znr const a, struct znr const b);
  */
 struct znr znr_div_r(struct znr const nr, double const r);
 
-/** Calculates the real sine of given real value by using the exponential
+/** Calculates the complex sine of given real value by using the exponential
  *  function [see znr_exp()].
  * 
  *  - The term count is for the power series used for exponential calculation
  *    [see znr_exp()].
  *  - Warning: This function does no range reduction!
  */
-double znr_real_sin(double const r, int const n_terms);
+struct znr znr_sin(struct znr const nr, int const n_terms);
 
-/** Calculates the real cosine of given real value by using the exponential
+/** Calculates the complex cosine of given real value by using the exponential
  *  function [see znr_exp()].
  * 
  *  - The term count is for the power series used for exponential calculation
@@ -60,7 +60,7 @@ double znr_real_sin(double const r, int const n_terms);
  *  - Warning: This function does no range reduction!
  *  - No need to know the constant Pi for this one. :-)
  */
-double znr_real_cos(double const r, int const n_terms);
+struct znr znr_cos(struct znr const nr, int const n_terms);
 
 /** Calculates the complex tangent of given complex value using the exponential
  *  functions.

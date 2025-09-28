@@ -62,30 +62,32 @@ struct znr znr_div_r(struct znr const nr, double const r)
     return (struct znr){ .r = nr.r / r, .i = nr.i / r };
 }
 
-double znr_real_sin(double const r, int const n_terms)
+struct znr znr_sin(struct znr const nr, int const n_terms)
 {
-    struct znr const ix = (struct znr){ .r = 0.0, .i = r }; // 0 + ix = ix
+    struct znr const i = (struct znr){ .r = 0.0, .i = 1.0 }; // 0 + i1 = i
+    struct znr const ix = znr_mul(i, nr); // 0 + ix = ix
     struct znr const neg_ix = znr_conjugate(ix); // 0 - ix = -ix
     struct znr const e_ix = znr_exp(ix, n_terms); // e^ix
     struct znr const e_neg_ix = znr_exp(neg_ix, n_terms); // e^-ix
     struct znr const num = znr_sub(e_ix, e_neg_ix); // e^ix - e^-ix
     struct znr const denom = (struct znr){ .r = 0.0, .i = 2.0 }; // 0 + 2i = 2i
-    struct znr const result = znr_div(num, denom); // (e^ix - e^-ix) / 2i 
+    struct znr const ret_val = znr_div(num, denom); // (e^ix - e^-ix) / 2i 
 
-    return result.r;
+    return ret_val;
 }
 
-double znr_real_cos(double const r, int const n_terms)
+struct znr znr_cos(struct znr const nr, int const n_terms)
 {
-    struct znr const ix = (struct znr){ .r = 0.0, .i = r }; // 0 + ix = ix
+    struct znr const i = (struct znr){ .r = 0.0, .i = 1.0 }; // 0 + i1 = i
+    struct znr const ix = znr_mul(i, nr); // 0 + ix = ix
     struct znr const neg_ix = znr_conjugate(ix); // 0 - ix = -ix
     struct znr const e_ix = znr_exp(ix, n_terms); // e^ix
     struct znr const e_neg_ix = znr_exp(neg_ix, n_terms); // e^-ix
     struct znr const num = znr_add(e_ix, e_neg_ix); // e^ix + e^-ix
     struct znr const denom = (struct znr){ .r = 2.0, .i = 0.0 }; // 2 + 0i = 2
-    struct znr const result = znr_div(num, denom); // (e^ix + e^-ix) / 2 
+    struct znr const ret_val = znr_div(num, denom); // (e^ix + e^-ix) / 2 
 
-    return result.r;
+    return ret_val;
 }
 
 struct znr znr_tan(struct znr const nr, int const n_terms)

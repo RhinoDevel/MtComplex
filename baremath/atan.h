@@ -8,6 +8,8 @@
 extern "C" {
 #endif
 
+double atan_atan2(double const y, double const x);
+
 /** Get arcus tangent of given value via Newton-Raphson.
  * 
  * - Returns not-a-number, if no reasonably precise result was found by

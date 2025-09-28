@@ -22,6 +22,37 @@ static double newton_raphson_step_atan(double const phi, double const x)
 	return ret_val;
 }
 
+double atan_atan2(double const y, double const x)
+{
+	if(0.0 < x)
+	{
+		return atan_atan(y / x);
+	}
+
+	double const pi = const_pi();
+
+	if(x == 0.0)
+	{
+		if(0.0 < y)
+		{
+			return pi / 2.0;
+		}
+		if(y < 0.0)
+		{
+			return -pi / 2.0;
+		}
+		return nan_get(); // y == 0.0
+	}
+
+	// x < 0.0
+
+	if(0.0 <= y)
+	{
+		return atan_atan(y / x) + pi;
+	}
+	return atan_atan(y / x) - pi; // y < 0.0
+}
+
 double atan_atan(double const val)
 {
 	// phi = atan(val) = ?

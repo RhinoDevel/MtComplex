@@ -37,7 +37,7 @@ double ln_ln(double const val)
     //
     // x = f * 2^n
     //
-    // 0.5 <= f < 2.1 // TODO: Use larger range?
+    // 0.5 <= f < 2.1 // TODO: Use larger range (why start at 0.5?)?
     //
     // ln(f * 2^n) = ln(f) - n * ln(2)
     //

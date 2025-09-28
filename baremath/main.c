@@ -75,7 +75,10 @@ static void test_znr(void)
 	printf("a / %f = %f + j%f\n", r, a_div_r.r, a_div_r.i);
 	printf("sin(%f) = %.16f\n", r, znr_real_sin(r, exp_terms));
 	printf("cos(%f) = %.16f\n", r, znr_real_cos(r, exp_terms));
-	printf("tan(%f) = %.16f\n", r, znr_real_tan(r, exp_terms));
+	printf(
+		"tan(%f) = %.16f\n",
+		r,
+		znr_tan((struct znr){ .r = r, .i = 0.0 }, exp_terms).r);
 	printf(
 		"e^%f = %f\n",
 		r,

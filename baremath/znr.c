@@ -88,18 +88,30 @@ double znr_real_cos(double const r, int const n_terms)
     return result.r;
 }
 
-double znr_real_tan(double const r, int const n_terms)
+struct znr znr_tan(struct znr const nr, int const n_terms)
 {
-    double const cos_r = znr_real_cos(r, n_terms);
+    // tan(x) = -i * (e^ix - e^-ix) / (e^ix + e^-ix)
 
-    if(cos_r == 0.0)
+    struct znr const i = (struct znr){ .r = 0.0, .i = 1.0 }; // 0 + i1 = i
+    struct znr const neg_i = znr_conjugate(i); // 0 - i1 = -i
+    struct znr const ix = znr_mul(i, nr); // i * x = ix
+    struct znr const neg_ix = znr_conjugate(ix); // -ix
+    struct znr const e_ix = znr_exp(ix, n_terms); // e^ix
+    struct znr const e_neg_ix = znr_exp(neg_ix, n_terms); // e^-ix
+    struct znr const denom = znr_add(e_ix, e_neg_ix); // e^ix + e^-ix
+
+    if(znr_squared_magnitude(denom) == 0.0)
     {
-        return nan_get();
+        return create_nan();
     }
-    
-    double const sin_r = znr_real_sin(r, n_terms);
 
-    return sin_r / cos_r;
+    struct znr const num = znr_sub(e_ix, e_neg_ix); // e^ix - e^-ix
+    struct znr const fraction = znr_div( // (e^ix - e^-ix) / (e^ix + e^-ix)
+        num, denom);
+    struct znr const ret_val = znr_mul( // -i * (e^ix - e^-ix) / (e^ix + e^-ix)
+        neg_i, fraction);
+
+    return ret_val;
 }
 
 struct znr znr_conjugate(struct znr const nr)

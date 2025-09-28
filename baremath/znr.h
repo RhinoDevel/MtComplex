@@ -62,15 +62,16 @@ double znr_real_sin(double const r, int const n_terms);
  */
 double znr_real_cos(double const r, int const n_terms);
 
-/** Calculates the real tangent of given real value by using the exponential
- *  functions to calculate sine and cosine [see znr_exp()].
- * 
- *  - Returns not-a-number, if cosine of given value is 0.
+/** Calculates the complex tangent of given complex value using the exponential
+ *  functions.
+ *
+ *  - Returns complex not-a-number, if denominator in used mathematical function
+ *    is 0. Check after call via znr_is_nan().
  *  - The term count is for the power series used for exponential calculation
- *    of sine and cosine [see znr_exp()].
+ *    [see znr_exp()].
  *  - Warning: This function does no range reduction!
  */
-double znr_real_tan(double const r, int const n_terms);
+struct znr znr_tan(struct znr const nr, int const n_terms);
 
 struct znr znr_conjugate(struct znr const nr);
 

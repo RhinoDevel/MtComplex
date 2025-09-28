@@ -8,6 +8,9 @@
 extern "C" {
 #endif
 
+/** Get arcus tangent of given value via Newton-Raphson.
+ * 
+ */
 double atan_atan(double const val);
 
 #ifdef __cplusplus

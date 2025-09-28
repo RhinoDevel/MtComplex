@@ -2,6 +2,7 @@
 // Marcel Timm, RhinoDevel, 2025sep27
 
 #include "znr_pol.h"
+#include "atan.h"
 #include "ln.h"
 #include "const.h"
 #include "znr.h"
@@ -126,6 +127,16 @@ static void test_znr_pol(void)
 	printf("\n");
 }
 
+static void test_atan(void)
+{
+	double const val = 1.234;
+	double const atan_val = atan_atan(val);
+
+	printf("*** TEST ATAN ***\n");
+	printf("atan(%f) = %f\n", val, atan_val);
+	printf("\n");
+}
+
 int main(void)
 {
 	printf("Bare Math!\n");
@@ -142,6 +153,8 @@ int main(void)
 	test_ln();
 
 	test_znr_pol();
+
+	test_atan();
 
 	return 0;
 }

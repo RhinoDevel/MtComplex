@@ -27,4 +27,4 @@ double ln_sqrt(double const x);
 }
 #endif
 
-#endif // MT_LN
+#endif //MT_LN

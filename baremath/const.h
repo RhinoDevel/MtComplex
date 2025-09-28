@@ -16,4 +16,4 @@ double const_pi(void);
 }
 #endif
 
-#endif // MT_CONST
+#endif //MT_CONST

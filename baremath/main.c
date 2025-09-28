@@ -129,11 +129,16 @@ static void test_znr_pol(void)
 
 static void test_atan(void)
 {
-	double const val = 1.234;
+	double const val = 0.3215;//-512.0;//1.234;
 	double const atan_val = atan_atan(val);
+
+	double const x = -512.0;
+	double const y = 1.234;
+	double const atan2_val = atan_atan2(y, x);
 
 	printf("*** TEST ATAN ***\n");
 	printf("atan(%f) = %f\n", val, atan_val);
+	printf("atan2(%f, %f) = %f\n", y, x, atan2_val);
 	printf("\n");
 }
 

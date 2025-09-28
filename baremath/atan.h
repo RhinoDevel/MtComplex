@@ -10,6 +10,8 @@ extern "C" {
 
 /** Get arcus tangent of given value via Newton-Raphson.
  * 
+ * - Returns not-a-number, if no reasonably precise result was found by
+ *   approximation.
  */
 double atan_atan(double const val);
 

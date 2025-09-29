@@ -141,6 +141,29 @@ double ln_sqrt(double const x)
     return exp.r;
 }
 
+double ln_pow(double const base, double const exponent)
+{
+    // base^exponent = e^[exponent * ln(base)]
+
+    static int const exp_terms = 20; // TODO: More or less?
+
+    double const ln_base = ln_ln(base);
+
+    if(nan_is(ln_base))
+    {
+        return ln_base/*nan_get()*/;
+    }
+
+    struct znr buf =
+        znr_exp((struct znr){.r = exponent * ln_base, .i = 0.0}, exp_terms);
+
+    if(znr_is_nan(buf))
+    {
+        return nan_get();
+    }
+    return buf.r;
+}
+
 void ln_init(void)
 {
     // Although nothing bad will happen, just unnecessary re-calculation:

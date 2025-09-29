@@ -25,6 +25,12 @@ double ln_ln(double const val);
  */
 double ln_sqrt(double const x);
 
+/**
+ * - TODO: Currently does not work for any kind of negative base (integers
+ *         included), also alway return not-a-number, if base is 0.
+ */
+double ln_pow(double const base, double const exponent);
+
 /** Call this once before use of any function.
  */
 void ln_init(void);

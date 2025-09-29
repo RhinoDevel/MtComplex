@@ -104,10 +104,13 @@ static void test_ln(void)
 {
 	double const e = const_e();
 	static double const val = 17.11;
+	static double const pow_base = 3.45;
+	static double const pow_exp = -1.234;
 
 	printf("*** TEST LN ***\n");
 	printf("ln(%f) = %f\n", e, ln_ln(e));
 	printf("sqrt(%f) = %f\n", val, ln_sqrt(val));
+	printf("pow(%f, %f) = %f\n", pow_base, pow_exp, ln_pow(pow_base, pow_exp));
 	printf("\n");
 }
 

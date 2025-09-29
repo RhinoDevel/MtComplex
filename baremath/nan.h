@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-bool nan_is(double const);
+bool nan_is(double const val);
 
 double nan_get(void);
 

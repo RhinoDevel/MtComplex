@@ -3,12 +3,9 @@
 
 #include "newton_raphson.h"
 #include "nan.h"
+#include "deb.h"
 
 #include <assert.h>
-
-// #ifndef NDEBUG
-//     #include <stdlib.h>
-// #endif //NDEBUG
 
 static double abs_diff(double const a, double const b)
 {
@@ -40,24 +37,18 @@ double newton_raphson(
         x_last = x;
         x = step_func(x, val);
        
-// #ifndef NDEBUG
-//         printf("n = %d, x_last = %.16f, x = %.16f\n", n, x_last, x);
-// #endif //NDEBUG
+        //deb_line("n = %d, x_last = %.16f, x = %.16f", n, x_last, x)
 
         if(nan_is(x))
         {
-// #ifndef NDEBUG
-//             printf(
-//                 "Exiting early, because step function returned not-a-number..");
-// #endif //NDEBUG 
+            //deb_line(
+            //    "Exiting early, because step function returned not-a-number..")
             return x/*nan_get()*/;
         }
 
         if(abs_diff(x, x_last) < done_diff)
         {
-// #ifndef NDEBUG
-//             printf("Found x = %.16f\n", x);
-// #endif //NDEBUG
+            //deb_line("Found x = %.16f", x)
             return x;
         }
     }

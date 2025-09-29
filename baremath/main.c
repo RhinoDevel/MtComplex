@@ -147,6 +147,7 @@ int main(void)
 	printf("\n");
 
 	const_init();
+	ln_init();
 
 	test_nan();
 

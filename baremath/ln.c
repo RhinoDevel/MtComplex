@@ -8,7 +8,12 @@
 #include "norm.h"
 #include "deb.h"
 
-static double s_ln_2 = 0.0; // Filled and used by ln_ln().
+#include <assert.h>
+
+#define MT_LN_UNSET 0.0
+
+// This constant will be calculated once via ln_init():
+static double s_ln_2 = MT_LN_UNSET; 
 
 static double newton_raphson_step_ln(double const x, double const val)
 {
@@ -24,6 +29,17 @@ static double newton_raphson_step_ln(double const x, double const val)
     return val / denom + x - 1.0;
 }
 
+static double create_ln_2(void)
+{
+    // 2.0 must be in the range used by ln_ln() (infinite loop, otherwise)!
+    return ln_ln(2.0);
+}
+
+/**
+ * - Kind of a hack: Also used by ln_init() to calculate ln(2) constant.
+ *                   works as long as 2 is in the range used here (infinite
+ *                   loop, otherwise).
+ */
 double ln_ln(double const val)
 {
     // ln(x) = ?
@@ -86,10 +102,8 @@ double ln_ln(double const val)
         return norm_ln;
     }
 
-    if(s_ln_2 == 0.0)
-    {
-        s_ln_2 = ln_ln(2.0); // *** RECURSION ***
-    }
+    assert(s_ln_2 != MT_LN_UNSET);
+
     //deb_line("ln(%f) = %f + %d * %f", val, norm_ln, norm_exp, s_ln_2)
     return norm_ln - (double)norm_exp * s_ln_2;
 }
@@ -125,4 +139,12 @@ double ln_sqrt(double const x)
     }
 
     return exp.r;
+}
+
+void ln_init(void)
+{
+    // Although nothing bad will happen, just unnecessary re-calculation:
+    assert(s_ln_2 == MT_LN_UNSET);
+
+    s_ln_2 = create_ln_2();
 }

@@ -13,6 +13,7 @@ extern "C" {
  *   inside that range and returns with not-a-number, if that fails.
  * - Returns not-a-number, if no reasonably precise result was found by
  *   approximation.
+ * - Call ln_init() first!
  */
 double ln_ln(double const val);
 
@@ -20,8 +21,13 @@ double ln_ln(double const val);
  * - Returns not-a-number, if x is negative.
  * - Returns not-a-number, if no reasonably precise intermediate result for
  *   ln(x) or result exp(0.5 x ln(x)) was found by approximation.
+ * - Call ln_init() first!
  */
 double ln_sqrt(double const x);
+
+/** Call this once before use of any function.
+ */
+void ln_init(void);
 
 #ifdef __cplusplus
 }

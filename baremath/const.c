@@ -5,6 +5,15 @@
 #include "znr.h"
 #include "newton_raphson.h"
 
+#include <assert.h>
+
+#define MT_CONST_UNSET 0.0
+
+// The(-se) constants will be calculated once via const_init():
+//
+static double s_e = MT_CONST_UNSET;
+static double s_pi = MT_CONST_UNSET;
+
 static double newton_raphson_step_pi_div_two(double const x, double const val)
 {
     (void)val; // For the compiler.
@@ -22,14 +31,14 @@ static double newton_raphson_step_pi_div_two(double const x, double const val)
     return ret_val;
 }
 
-double const_e(void)
+static double create_e(void)
 {
     static int const exp_terms = 18;
 
     return znr_exp((struct znr){.r = 1.0, .i = 0.0}, exp_terms).r;
 }
 
-double const_pi(void)
+static double create_pi(void)
 {
     // Approximate Pi by using Newton-Raphson.
 
@@ -46,4 +55,26 @@ double const_pi(void)
         max_steps, done_diff, x_0, 0.0, newton_raphson_step_pi_div_two);
 
     return 2.0 * pi_div_two;
+}
+
+double const_e(void)
+{
+    assert(s_e != MT_CONST_UNSET);
+    return s_e;
+}
+
+double const_pi(void)
+{
+    assert(s_pi != MT_CONST_UNSET);
+    return s_pi;
+}
+
+void const_init(void)
+{
+    // Although nothing bad will happen, just unnecessary re-calculation:
+    assert(s_e == MT_CONST_UNSET);
+    assert(s_pi == MT_CONST_UNSET);
+
+    s_e = create_e();
+    s_pi = create_pi();
 }

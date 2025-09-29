@@ -146,6 +146,8 @@ int main(void)
 	printf("Bare Math!\n");
 	printf("\n");
 
+	const_init();
+
 	test_nan();
 
 	test_norm();

@@ -6,10 +6,7 @@
 #include "newton_raphson.h"
 #include "nan.h"
 #include "norm.h"
-
-// #ifndef NDEBUG
-//     #include <stdlib.h>
-// #endif //NDEBUG
+#include "deb.h"
 
 static double s_ln_2 = 0.0; // Filled and used by ln_ln().
 
@@ -22,9 +19,7 @@ static double newton_raphson_step_ln(double const x, double const val)
 
     double const denom = znr_exp((struct znr){ .r = x, .i = 0.0 }, exp_terms).r;
 
-// #ifndef NDEBUG
-//     printf("newton_raphson_step_ln: exp(%f) = %f\n", denom);
-// #endif //NDEBUG
+    //deb_line("exp(%f) = %f", x, denom)
 
     return val / denom + x - 1.0;
 }
@@ -95,15 +90,13 @@ double ln_ln(double const val)
     {
         s_ln_2 = ln_ln(2.0); // *** RECURSION ***
     }
-    //printf("ln(%f) = %f + %d * %f\n", val, norm_ln, norm_exp, s_ln_2);
+    //deb_line("ln(%f) = %f + %d * %f", val, norm_ln, norm_exp, s_ln_2)
     return norm_ln - (double)norm_exp * s_ln_2;
 }
 
 double ln_sqrt(double const x)
 {
-// #ifndef NDEBUG
-//     printf("Entered ln_sqrt(x) with x = %.16f.\n", x);
-// #endif //NDEBUG
+    //deb_line("Entered with x = %.16f.", x)
 
     static int const exp_terms = 20; // TODO: More or less?
 
@@ -116,9 +109,7 @@ double ln_sqrt(double const x)
 
     double const ln_x = ln_ln(x);
     
-// #ifndef NDEBUG
-//     printf("ln_sqrt(x): ln_ln(x) = %.16f.\n", ln_x);
-// #endif //NDEBUG
+    //deb_line("ln_ln(x) = %.16f.", ln_x)
 
     if(nan_is(ln_x))
     {

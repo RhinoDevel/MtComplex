@@ -2,12 +2,9 @@
 // RhinoDevel, Marcel Timm, 2025sep25
 
 #include "norm.h"
+#include "deb.h"
 
 #include <assert.h>
-
-// #ifndef NDEBUG
-//     #include <stdlib.h>
-// #endif //NDEBUG
 
 double norm_get_in_range_factor_and_fill(
     double const pos_val,
@@ -37,13 +34,12 @@ double norm_get_in_range_factor_and_fill(
     {
         if(range_from_incl <= *out_norm_val)
         {
-// #ifndef NDEBUG
-//             printf("DEBUG: norm_get_in_range_factor_and_fill: Reached %.16e (>= %.16e) after %d iterations, exponent is %d.\n",
-//                 *out_norm_val,
-//                 range_from_incl,
-//                 i,
-//                 *out_exp);
-// #endif //NDEBUG
+            //deb_line(
+            //    "Reached %.16e (>= %.16e) after %d iterations, exponent is %d.",
+            //     *out_norm_val,
+            //     range_from_incl,
+            //     i,
+            //     *out_exp)
             break; // Done
         }
 
@@ -61,14 +57,12 @@ double norm_get_in_range_factor_and_fill(
     {
         if(*out_norm_val < range_through_excl)
         {
-// #ifndef NDEBUG
-//             printf(
-//                 "DEBUG: norm_get_in_range_factor_and_fill: Reached %.16e (< %.16e) after %d iterations, exponent is %d.\n",
-//                 *out_norm_val,
-//                 range_through_excl,
-//                 i,
-//                 *out_exp);
-// #endif //NDEBUG
+            //deb_line(
+            //    "Reached %.16e (< %.16e) after %d iterations, exponent is %d.",
+            //     *out_norm_val,
+            //     range_through_excl,
+            //     i,
+            //     *out_exp)
             break; // Done
         }
 

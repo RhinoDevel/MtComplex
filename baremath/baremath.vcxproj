@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="atan.h" />
     <ClInclude Include="const.h" />
+    <ClInclude Include="deb.h" />
     <ClInclude Include="ln.h" />
     <ClInclude Include="nan.h" />
     <ClInclude Include="newton_raphson.h" />

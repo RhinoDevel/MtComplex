@@ -68,5 +68,8 @@
     <ClInclude Include="atan.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="deb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -170,7 +170,7 @@ struct znr znr_exp(struct znr const nr, int const n_terms)
     {
         // term = term * nr_to_use / n
 
-        term = znr_div_r(znr_mul(term, nr_to_use), n);
+        term = znr_div_r(znr_mul(term, nr_to_use), (double)n);
         
         ret_val = znr_add(ret_val, term);
     }
